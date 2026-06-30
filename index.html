@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Rincón del Antojo</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+margin:0;
+background:#FFF8F0;
+}
+
+header{
+background:#8B4513;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+header h1{
+margin:0;
+font-size:40px;
+}
+
+header p{
+margin-top:10px;
+}
+
+.hero{
+text-align:center;
+padding:40px;
+}
+
+.hero h2{
+color:#8B4513;
+font-size:35px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+button{
+background:#8B4513;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:10px;
+cursor:pointer;
+}
+
+#productos{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.producto{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,.15);
+text-align:center;
+}
+
+.producto h3{
+color:#8B4513;
+}
+
+footer{
+background:#8B4513;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:30px;
+}
+
+#carrito{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#8B4513;
+color:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,.3);
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🍰 El Rincón del Antojo</h1>
+
+<p>Dulce & Salado</p>
+
+</header>
+
+<section class="hero">
+
+<h2>Bienvenido</h2>
+
+<p>Los mejores postres, desayunos, alfajores y tortas de Las Piedras.</p>
+
+</section>
+
+<section>
+
+<h2 style="text-align:center;color:#8B4513;">Nuestro Menú</h2>
+
+<div id="productos"></div>
+
+</section>
+
+<div id="carrito">
+
+<h3>🛒 Carrito</h3>
+
+<div id="listaCarrito">
+Aún no agregaste productos.
+</div>
+
+<br>
+
+<b>Total: $<span id="total">0</span></b>
+
+<br><br>
+
+<button onclick="pedido()">Pedir por WhatsApp</button>
+
+<button onclick="vaciar()">Vaciar</button>
+
+</div>
+
+<footer>
+
+<p>📍 Las Piedras</p>
+
+<p>📲 WhatsApp: 098 449 771</p>
+
+<p>📸 Instagram: @elrincondelantojo_02</p>
+
+</footer>
+
+<script>
+
+let carrito = {};
+
+function vaciar() {
+    carrito = {};
+    actualizar();
+}
+
+const productos=[
+["Alfajor de Maicena (1 unidad)",25],
+["Alfajores de Maicena (10 unidades)",200],
+["Mini Pastafrola",40],
+["Porción Torta de Chocolate",45],
+["Porción Torta Marmolada",45],
+["Bandeja 10 Sándwiches J&Q",175],
+["Bandeja 10 Pebetes J&Q",115],
+["Chajá",700],
+["Brownie",600],
+["Lemon Pie",550]
+];
+
+let lista=document.getElementById("productos");
+
+productos.forEach(p=>{
+
+lista.innerHTML+=`
+<div class="producto">
+
+<h3>${p[0]}</h3>
+
+<p><b>$${p[1]}</b></p>
+
+<button onclick="agregar('${p[0]}',${p[1]})">Agregar</button>
+
+</div>
+`;
+
+});
+
+function agregar(nombre,precio){
+
+if(!carrito[nombre]){
+carrito[nombre]={precio:precio,cantidad:0};
+}
+
+carrito[nombre].cantidad++;
+
+actualizar();
+
+}
+
+function actualizar(){
+
+let total=0;
+let texto="🛒 Pedido:%0A";
+let html="";
+
+for(let producto in carrito){
+
+let item=carrito[producto];
+
+total+=item.precio*item.cantidad;
+
+texto+=`${item.cantidad} x ${producto} - $${item.precio*item.cantidad}%0A`;
+
+html+=`
+<p>
+${item.cantidad} x ${producto}<br>
+$${item.precio*item.cantidad}
+</p>
+<hr>
+`;
+
+}
+
+if(html==""){
+html="Aún no agregaste productos.";
+}
+
+document.getElementById("listaCarrito").innerHTML=html;
+document.getElementById("total").innerHTML=total;
+
+window.pedidoWhatsapp=texto+"%0ATotal: $"+total;
+
+}
+
+function pedido(){
+
+if(!window.pedidoWhatsapp){
+alert("Primero agrega un producto al carrito.");
+return;
+}
+
+window.open("https://wa.me/59898449771?text="+window.pedidoWhatsapp);
+
+}
+
+</script>
+
+</body>
+
+</html>
