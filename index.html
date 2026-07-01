@@ -33,7 +33,7 @@
 <a href="#nosotros">Sobre Nosotros</a>
 
 <a href="#contacto">Contacto</a>
-<button onclick="mostrarCarrito()">🛒 Carrito</button>
+<button onclick="openCart()">🛒 Carrito</button>
 </nav>
 
 </header>
@@ -192,24 +192,30 @@ En <strong>El Rincón del Antojo</strong> elaboramos productos caseros con ingre
 <p>📍 Uruguay</p>
 
 </section>
-<div id="carrito">
-  <h3>🛒 Tu pedido (<span id="contador">0</span>)</h3>
+<div id="cartModal" class="modal">
+  <div class="modal-content">
 
-  <ul id="lista-carrito"></ul>
+    <span onclick="closeCart()">✖</span>
 
-  <p id="total">Total: $0</p>
+    <h2>Tu carrito</h2>
 
-  <button onclick="vaciarCarrito()">🗑 Vaciar carrito</button>
+    <p>No hay productos aún</p>
 
-  <button onclick="pedirWhatsApp()">📱 Enviar pedido</button>
+    <p>Total: $0</p>
+
+    <p>Forma de pago:</p>
+
+    <label>
+      <input type="radio" name="pago"> Efectivo
+    </label>
+
+    <label>
+      <input type="radio" name="pago"> Tarjeta
+    </label>
+
+    <button onclick="pedirWhatsApp()">Finalizar pedido</button>
+
+  </div>
 </div>
-<footer>
-
-<p>© 2026 El Rincón del Antojo - Todos los derechos reservados.</p>
-
-</footer>
-
-<script src="script.js"></script>
-
 </body>
 </html>
