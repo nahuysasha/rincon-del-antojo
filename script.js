@@ -23,17 +23,32 @@ botones.forEach((boton) => {
 
 function actualizarCarrito() {
     const lista = document.getElementById("lista-carrito");
+    const totalHTML = document.getElementById("total");
+
     lista.innerHTML = "";
 
-    carrito.forEach((item) => {
+    let total = 0;
+
+    carrito.forEach((item, index) => {
         const li = document.createElement("li");
+
         li.textContent = item.producto + " - $" + item.precio;
+
         lista.appendChild(li);
+
+        total += item.precio;
     });
+
+    totalHTML.textContent = "Total: $" + total;
 }
 
 function mostrarCarrito() {
     document.getElementById("carrito").classList.toggle("activo");
+}
+
+function vaciarCarrito() {
+    carrito = [];
+    actualizarCarrito();
 }
 
 function pedirWhatsApp() {
