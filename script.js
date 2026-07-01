@@ -1,5 +1,7 @@
 let carrito = [];
 
+document.addEventListener("DOMContentLoaded", () => {
+
 const botones = document.querySelectorAll(".producto button");
 
 botones.forEach((boton) => {
@@ -11,9 +13,28 @@ botones.forEach((boton) => {
 
         carrito.push({ producto, precio });
 
+        actualizarCarrito();
+
         alert(producto + " agregado al carrito.");
     });
 });
+
+});
+
+function actualizarCarrito() {
+    const lista = document.getElementById("lista-carrito");
+    lista.innerHTML = "";
+
+    carrito.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item.producto + " - $" + item.precio;
+        lista.appendChild(li);
+    });
+}
+
+function mostrarCarrito() {
+    document.getElementById("carrito").classList.toggle("activo");
+}
 
 function pedirWhatsApp() {
 
