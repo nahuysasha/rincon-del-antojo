@@ -27,11 +27,6 @@
 <a href="#productos">Productos</a>
 <a href="#nosotros">Sobre Nosotros</a>
 <a href="#contacto">Contacto</a>
-
-<button onclick="openCart()">
-🛒 Carrito (<span id="contador">0</span>)
-</button>
-
 </nav>
 
 </header>
@@ -210,7 +205,11 @@ En <strong>El Rincón del Antojo</strong> elaboramos productos caseros con ingre
 </div>
 
 </div>
-
+<!-- Botón flotante del carrito -->
+<button id="btnCarrito" class="btn-carrito" onclick="openCart()">
+    🛒
+    <span id="contador">0</span>
+</button>
 <script src="script.js"></script>
 
 </body>
