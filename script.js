@@ -53,8 +53,12 @@ function eliminarProducto(index) {
     actualizarCarrito();
 }
 
-function mostrarCarrito() {
-    document.getElementById("carrito").classList.toggle("activo");
+function openCart(){
+    document.getElementById("cartModal").style.display = "flex";
+}
+
+function closeCart(){
+    document.getElementById("cartModal").style.display = "none";
 }
 
 function vaciarCarrito() {
