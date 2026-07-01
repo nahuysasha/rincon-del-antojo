@@ -24,15 +24,20 @@ botones.forEach((boton) => {
 function actualizarCarrito() {
     const lista = document.getElementById("lista-carrito");
     const totalHTML = document.getElementById("total");
+    const contador = document.getElementById("contador");
 
     lista.innerHTML = "";
 
     let total = 0;
 
     carrito.forEach((item, index) => {
+
         const li = document.createElement("li");
 
-        li.textContent = item.producto + " - $" + item.precio;
+        li.innerHTML = `
+            ${item.producto} - $${item.precio}
+            <button onclick="eliminarProducto(${index})">❌</button>
+        `;
 
         lista.appendChild(li);
 
@@ -40,6 +45,12 @@ function actualizarCarrito() {
     });
 
     totalHTML.textContent = "Total: $" + total;
+    contador.textContent = carrito.length;
+}
+
+function eliminarProducto(index) {
+    carrito.splice(index, 1);
+    actualizarCarrito();
 }
 
 function mostrarCarrito() {
